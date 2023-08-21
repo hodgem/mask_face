@@ -53,8 +53,8 @@ mkdir -p ${rt}_nii
 #ofile=$(find -name o*.nii)
 #file=$(find -name [0-9]*.nii)
 
-echo dcm2niix -o . -x i -m 1 -f ${rt}_orig $inrt
-dcm2niix -o . -x i -m 1 -f ${rt}_orig $inrt
+echo dcm2niix -o . -x i -m 1 -z n -f ${rt}_orig $inrt
+dcm2niix -o . -x i -m 1 -z n -f ${rt}_orig $inrt
 
 #echo dcm2nii -o . -m 1 -x n -f ${rt}_reor_dcm2nii $inrt
 #dcm2nii -o . -m 1 -x n -f ${rt}_reor_dcm2nii $inrt
