@@ -4,7 +4,7 @@ ENV MCR_HOME=/usr/local/MATLAB_Runtime \
 	MASKFACE_HOME=/usr/local/maskface \
 	MCR_CACHE_ROOT=/tmp \
 	FSLDIR=/nrgpackages/packages/fsl \
-	PATH=/usr/local/miniconda3/bin:/nrgpackages/packages/fsl/bin:/nrgpackages/tools/nrg-improc:$PATH
+	PATH=/usr/local/miniconda3/bin:/nrgpackages/packages/fsl/bin:/nrgpackages/tools/nrg-improc:$HOME/bin:$PATH
 
 RUN curl https://nvidia.github.io/nvidia-docker/centos7/nvidia-docker.repo > /etc/yum.repos.d/nvidia-docker.repo && \ 
 	yum -y install nvidia-container-toolkit ImageMagick wget zip unzip bzip2 git bc which libX11 libXt java 
@@ -17,6 +17,10 @@ RUN mkdir -p /usr/local/MATLAB_Runtime && \
     ./Miniconda3-4.5.1-Linux-x86_64.sh -u -b -p /usr/local/miniconda3 && \
     rm -rf /tmp/* && \
     pip install --upgrade pip
+
+# HCP REQUIREMENTS
+COPY requirements_python3.txt /tmp/requirements_python3.txt
+RUN pip install -r /tmp/requirements_python3.txt
     
 RUN cd /var/local; git clone https://github.com/MIC-DKFZ/HD-BET; cd HD-BET; pip install -e . ; cd HD_BET; \
     wget -O 0.model https://zenodo.org/record/2540695/files/0.model?download=1; \    
